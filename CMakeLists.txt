@@ -15,6 +15,7 @@ add_subdirectory("${CMAKE_SOURCE_DIR}/103GE")
 
 add_executable(${PROJECT_NAME}
         ${CORE_SOURCES}
+        uh
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${INC} ${RE_INCLUDE})
