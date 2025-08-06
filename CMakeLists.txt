@@ -13,10 +13,9 @@ target_include_directories(glad PRIVATE ${INC})
 add_subdirectory("${CMAKE_SOURCE_DIR}/103GE-RenderEngine")
 add_subdirectory("${CMAKE_SOURCE_DIR}/103GE")
 
-add_executable(${PROJECT_NAME} 
-        main.cpp
+add_executable(${PROJECT_NAME}
         ${CORE_SOURCES}
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${INC})
-target_link_libraries(${PROJECT_NAME} glad)
+target_include_directories(${PROJECT_NAME} PRIVATE ${INC} ${RE_INCLUDE})
+target_link_libraries(${PROJECT_NAME} glad render)

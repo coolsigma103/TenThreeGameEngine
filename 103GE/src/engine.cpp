@@ -3,29 +3,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-// #include <103GE/re/render_engine.hpp>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <iostream>
-#include <memory>
-
-#include "EobCS/EobCS.hpp"
-#include "EobCS/entityManager.hpp"
-#include "EobCS/entity.hpp"
-#include "EobCS/componentManager.hpp"
-#include "EobCS/systemManager.hpp"
-
-using namespace EobCS;
-// using namespace TTGE;
-
 bool shouldClose = false;
 GLFWwindow *window;
-
-void registerComponents() {}
-
-void registerSystems() {}
-
 void init()
 {
     glfwInit();
@@ -36,9 +15,6 @@ void init()
     window = glfwCreateWindow(800, 600, "103GE", nullptr, nullptr);
     glfwMakeContextCurrent(window);
     gladLoadGL();
-
-    registerComponents();
-    registerSystems();
 }
 
 void update(float delta) {}
@@ -60,11 +36,16 @@ void run()
     }
 }
 
+void destroy()
+{
+    glfwTerminate();
+    glfwDestroyWindow(window);
+}
+
 int main()
 {
     init();
     run();
-    glfwTerminate();
-    glfwDestroyWindow(window);
+    destroy();
     return 0;
 }
