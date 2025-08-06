@@ -43,3 +43,4 @@
 #workspace setup
 *.clang-format
 *.clangd
+**/build/
