@@ -1,0 +1,26 @@
+[
+{
+  "directory": "D:/Bao/cpp-project/103GE-RenderEngine/build",
+  "command": "D:\\msys2\\ucrt64\\bin\\gcc.exe  @CMakeFiles/stb.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\stb.dir\\lib\\stb.c.obj -c D:\\Bao\\cpp-project\\103GE-RenderEngine\\lib\\stb.c",
+  "file": "D:/Bao/cpp-project/103GE-RenderEngine/lib/stb.c",
+  "output": "CMakeFiles/stb.dir/lib/stb.c.obj"
+},
+{
+  "directory": "D:/Bao/cpp-project/103GE-RenderEngine/build",
+  "command": "D:\\msys2\\ucrt64\\bin\\gcc.exe  @CMakeFiles/glad.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\glad.dir\\lib\\glad.c.obj -c D:\\Bao\\cpp-project\\103GE-RenderEngine\\lib\\glad.c",
+  "file": "D:/Bao/cpp-project/103GE-RenderEngine/lib/glad.c",
+  "output": "CMakeFiles/glad.dir/lib/glad.c.obj"
+},
+{
+  "directory": "D:/Bao/cpp-project/103GE-RenderEngine/build",
+  "command": "D:\\msys2\\ucrt64\\bin\\g++.exe  @CMakeFiles/render.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\render.dir\\src\\shader.cpp.obj -c D:\\Bao\\cpp-project\\103GE-RenderEngine\\src\\shader.cpp",
+  "file": "D:/Bao/cpp-project/103GE-RenderEngine/src/shader.cpp",
+  "output": "CMakeFiles/render.dir/src/shader.cpp.obj"
+},
+{
+  "directory": "D:/Bao/cpp-project/103GE-RenderEngine/build",
+  "command": "D:\\msys2\\ucrt64\\bin\\g++.exe  @CMakeFiles/render.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\render.dir\\src\\texture.cpp.obj -c D:\\Bao\\cpp-project\\103GE-RenderEngine\\src\\texture.cpp",
+  "file": "D:/Bao/cpp-project/103GE-RenderEngine/src/texture.cpp",
+  "output": "CMakeFiles/render.dir/src/texture.cpp.obj"
+}
+]

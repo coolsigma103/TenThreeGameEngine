@@ -1,0 +1,26 @@
+[
+{
+  "directory": "D:/Bao/cpp-project/103GE/build",
+  "command": "D:\\msys2\\ucrt64\\bin\\cc.exe  @CMakeFiles/glad.dir/includes_C.rsp -std=gnu11 -o CMakeFiles\\glad.dir\\lib\\glad.c.obj -c D:\\Bao\\cpp-project\\103GE\\lib\\glad.c",
+  "file": "D:/Bao/cpp-project/103GE/lib/glad.c",
+  "output": "CMakeFiles/glad.dir/lib/glad.c.obj"
+},
+{
+  "directory": "D:/Bao/cpp-project/103GE/build",
+  "command": "D:\\msys2\\ucrt64\\bin\\cc.exe  @CMakeFiles/stb.dir/includes_C.rsp -std=gnu11 -o CMakeFiles\\stb.dir\\lib\\stb.c.obj -c D:\\Bao\\cpp-project\\103GE\\lib\\stb.c",
+  "file": "D:/Bao/cpp-project/103GE/lib/stb.c",
+  "output": "CMakeFiles/stb.dir/lib/stb.c.obj"
+},
+{
+  "directory": "D:/Bao/cpp-project/103GE/build",
+  "command": "D:\\msys2\\ucrt64\\bin\\c++.exe  @CMakeFiles/103GE.dir/includes_CXX.rsp -std=gnu++17 -o CMakeFiles\\103GE.dir\\src\\main.cpp.obj -c D:\\Bao\\cpp-project\\103GE\\src\\main.cpp",
+  "file": "D:/Bao/cpp-project/103GE/src/main.cpp",
+  "output": "CMakeFiles/103GE.dir/src/main.cpp.obj"
+},
+{
+  "directory": "D:/Bao/cpp-project/103GE/build",
+  "command": "D:\\msys2\\ucrt64\\bin\\c++.exe  @CMakeFiles/103GE.dir/includes_CXX.rsp -std=gnu++17 -o CMakeFiles\\103GE.dir\\src\\test.cpp.obj -c D:\\Bao\\cpp-project\\103GE\\src\\test.cpp",
+  "file": "D:/Bao/cpp-project/103GE/src/test.cpp",
+  "output": "CMakeFiles/103GE.dir/src/test.cpp.obj"
+}
+]
