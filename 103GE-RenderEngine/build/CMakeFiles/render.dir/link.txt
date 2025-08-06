@@ -1,2 +1,0 @@
-D:\msys2\ucrt64\bin\ar.exe qc librender.a CMakeFiles/render.dir/src/shader.cpp.obj CMakeFiles/render.dir/src/texture.cpp.obj
-D:\msys2\ucrt64\bin\ranlib.exe librender.a

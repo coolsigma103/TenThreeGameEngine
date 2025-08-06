@@ -1,2 +1,0 @@
-D:\msys2\ucrt64\bin\ar.exe qc libstb.a CMakeFiles/stb.dir/lib/stb.c.obj
-D:\msys2\ucrt64\bin\ranlib.exe libstb.a
