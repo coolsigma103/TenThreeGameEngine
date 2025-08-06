@@ -44,3 +44,5 @@
 *.clang-format
 *.clangd
 **/build/
+**/.cache/
+**/.vscode/

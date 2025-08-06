@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include <103GE/re/render_engine.hpp>
+// #include <103GE/re/render_engine.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -17,7 +17,7 @@
 #include "EobCS/systemManager.hpp"
 
 using namespace EobCS;
-using namespace TTGE;
+// using namespace TTGE;
 
 bool shouldClose = false;
 GLFWwindow *window;
