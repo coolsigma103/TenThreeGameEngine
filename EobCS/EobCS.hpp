@@ -12,8 +12,6 @@
 using EntityID = std::uint16_t;
 using Signature = std::bitset<32>;
 
-#include "entity.hpp"
-
 enum ComponentType
 {
     RENDERABLE = 0,

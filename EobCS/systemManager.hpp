@@ -2,6 +2,7 @@
 #define SYSTEM_MANAGER_H
 
 #include "EobCS.hpp"
+#include "entity.hpp"
 
 namespace EobCS
 {
@@ -27,7 +28,7 @@ namespace EobCS
         template <typename T>
         std::shared_ptr<T> registerSystem(Signature sig);
 
-        void entitySignatureChanged(Entity *entity, Signature entitySignature);
+        void entitySignatureChanged(Entity *entity);
 
         template <typename T>
         Signature getSignature();
@@ -37,6 +38,11 @@ namespace EobCS
             return systems;
         }
     };
+    static SystemManager *currSM = nullptr;
+    inline SystemManager *&getCurrSM()
+    {
+        return getCurrSM();
+    }
 }  // namespace EobCS
 
 #endif

@@ -17,7 +17,8 @@ namespace EobCS
         friend class SystemManager;
 
        public:
-        Entity(EntityID id, Entity *parent) : parent(parent), entityID(id) {}
+        Entity(EntityID id, Entity *parent = nullptr) : parent(parent), entityID(id) {}
+        Entity(Entity *parent = nullptr);
         void addChild(Entity *entity)
         {
             children.push_back(entity);

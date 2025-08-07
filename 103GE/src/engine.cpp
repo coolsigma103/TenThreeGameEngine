@@ -2,6 +2,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "engine.hpp"
 
 bool shouldClose = false;
 GLFWwindow *window;
@@ -40,12 +41,4 @@ void destroy()
 {
     glfwTerminate();
     glfwDestroyWindow(window);
-}
-
-int main()
-{
-    init();
-    run();
-    destroy();
-    return 0;
 }

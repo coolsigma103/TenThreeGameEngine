@@ -2,6 +2,7 @@
 #define ENTITY_MANAGER_H
 
 #include "EobCS.hpp"
+#include "entity.hpp"
 
 namespace EobCS
 {
@@ -24,6 +25,8 @@ namespace EobCS
             }
         }
 
+        friend class Entity;
+
        public:
         EntityManager()
         {
@@ -41,6 +44,12 @@ namespace EobCS
             return entity->signature;
         }
     };
+
+    static EntityManager *currEM = nullptr;
+    inline EntityManager *&getCurrEM()
+    {
+        return getCurrEM();
+    }
 }  // namespace EobCS
 
 #endif

@@ -2,6 +2,7 @@
 #define COMPONENT_MANAGER_H
 
 #include "EobCS.hpp"
+#include "entity.hpp"
 
 namespace EobCS
 {
@@ -51,6 +52,12 @@ namespace EobCS
             return getComponentArray<T>().type;
         }
     };
+
+    static ComponentManager *currCM = nullptr;
+    inline ComponentManager *&getCurrCM()
+    {
+        return getCurrCM();
+    }
 }  // namespace EobCS
 
 #endif
