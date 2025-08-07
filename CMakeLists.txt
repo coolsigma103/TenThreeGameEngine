@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 4.0)
-# set standard
+#set standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #set some path
-set(INC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+set(INC "${CMAKE_CURRENT_SOURCE_DIR}/include") #add a lib and include in the repo root
 set(LIB "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 set(EobCS "${CMAKE_CURRENT_SOURCE_DIR}/EobCS/EobCS.hpp")
  
