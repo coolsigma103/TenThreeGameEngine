@@ -9,7 +9,7 @@ namespace EobCS
     class System
     {
        public:
-        std::unordered_set<Entity *> entities;
+        std::vector<Entity *> entities;
 
         virtual void update(float dt) = 0;
     };
@@ -28,7 +28,7 @@ namespace EobCS
         template <typename T>
         std::shared_ptr<T> registerSystem(Signature sig);
 
-        void entitySignatureChanged(Entity *entity);
+        void entitySignatureChanged(Entity &entity);
 
         template <typename T>
         Signature getSignature();

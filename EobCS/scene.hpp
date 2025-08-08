@@ -7,17 +7,33 @@
 #include "componentManager.hpp"
 #include "systemManager.hpp"
 
+#include <fstream>
+
 namespace EobCS
 {
     class Scene : public Entity
     {
-        EntityManager em;
+        EntityManager em = EntityManager(0);
         ComponentManager cm;
         SystemManager sm;
 
        public:
         Scene() : Entity() {}
-        void update();
+        void update(float delta)
+        {
+            for (auto [name, system] : sm.getSystems())
+            {
+                system->update(delta);
+            }
+        }
+    };
+
+    class PackedScene
+    {
+       public:
+        void saveAsBinary() {}
+
+        static Scene load(PackedScene packedScene) {}
     };
 }  // namespace EobCS
 

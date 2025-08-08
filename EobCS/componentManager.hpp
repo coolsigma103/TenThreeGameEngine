@@ -34,17 +34,16 @@ namespace EobCS
         void registerComponent(ComponentType type);
 
         template <typename T>
-        void setComponent(Entity *entity, const T &component);
+        void setComponent(Entity &entity, const T &component);
 
         template <typename T>
-        T *&getComponent(Entity *entity)
+        T &getComponent(Entity &entity)
         {
-            auto component = getComponentArray<T>()->components[entity->getEntityID()];
-            return component;
+            return getComponentArray<T>()->components[entity.getEntityID()];
         }
 
         template <typename T>
-        void removeComponent(Entity *entity);
+        void removeComponent(Entity &entity);
 
         template <typename T>
         ComponentType getComponentType() const
@@ -56,7 +55,7 @@ namespace EobCS
     static ComponentManager *currCM = nullptr;
     inline ComponentManager *&getCurrCM()
     {
-        return getCurrCM();
+        return currCM;
     }
 }  // namespace EobCS
 

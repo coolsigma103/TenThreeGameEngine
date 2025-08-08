@@ -9,8 +9,8 @@ namespace EobCS
     class EntityManager
     {
        private:
-        EntityID nextID = 1;
-        std::unordered_map<EntityID, Entity *> entities;
+        EntityID nextID;
+        std::unordered_map<EntityID, Entity> entities;
         std::queue<EntityID> freeIDs;
 
         EntityID getNextID()
@@ -26,22 +26,24 @@ namespace EobCS
         }
 
         friend class Entity;
+        Entity &createEntity(Entity *entity);
 
        public:
-        EntityManager()
+        EntityManager(EntityID firstid = 1)
         {
+            nextID = firstid;
             use();
         }
         void use();
-        Entity *createEntity(Entity *parent = nullptr);
-        void destroyEntity(Entity *entity);
-        void setSignature(Entity *entity, Signature sig)
+        Entity &createEntity(Entity &parent);
+        void destroyEntity(Entity &entity);
+        void setSignature(Entity &entity, Signature sig)
         {
-            entity->signature = sig;
+            entity.signature = sig;
         }
-        Signature getSignature(Entity *entity) const
+        Signature getSignature(Entity &entity) const
         {
-            return entity->signature;
+            return entity.signature;
         }
     };
 

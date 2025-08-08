@@ -8,6 +8,7 @@
 #include <queue>
 #include <unordered_map>
 #include <unordered_set>
+#include <algorithm>
 
 using EntityID = std::uint16_t;
 using Signature = std::bitset<32>;

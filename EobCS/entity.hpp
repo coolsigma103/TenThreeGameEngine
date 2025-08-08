@@ -17,15 +17,28 @@ namespace EobCS
         friend class SystemManager;
 
        public:
-        Entity(EntityID id, Entity *parent = nullptr) : parent(parent), entityID(id) {}
-        Entity(Entity *parent = nullptr);
-        void addChild(Entity *entity)
+        Entity(EntityID id, Entity &parent) : parent(&parent), entityID(id) {}
+        Entity(Entity &parent);
+        Entity();
+        ~Entity()
         {
-            children.push_back(entity);
+            for (Entity *child : children)
+            {
+                delete child;
+            }
+            delete parent;
         }
-        std::vector<Entity *> getChildren()
+        void addChild(Entity &entity)
+        {
+            children.push_back(&entity);
+        }
+        std::vector<Entity *> &getChildren()
         {
             return children;
+        }
+        Entity *&getParent()
+        {
+            return parent;
         }
         EntityID getEntityID()
         {

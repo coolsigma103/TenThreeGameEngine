@@ -5,8 +5,8 @@
 #include "entity.hpp"
 #include "componentManager.hpp"
 #include "systemManager.hpp"
-
 #include "scene.hpp"
+#include "root.hpp"
 
 using namespace EobCS;
 
@@ -15,18 +15,24 @@ void EntityManager::use()
 {
     getCurrEM() = this;
 }
-Entity* EntityManager::createEntity(Entity* parent)
+Entity& EntityManager::createEntity(Entity& parent)
 {
     EntityID id = getNextID();
-    auto newEntt = new Entity(id, parent);
-    entities[id] = newEntt;
-    return newEntt;
+    entities[id] = Entity(id, parent);
+    return entities[id];
 }
-void EntityManager::destroyEntity(Entity* entity)
+Entity& EntityManager::createEntity(Entity* entity)
 {
-    entities.erase(entity->entityID);
-    freeIDs.push(entity->entityID);
+    EntityID id = getNextID();
+    entity->entityID = id;
+    entities[id] = *entity;
     delete entity;
+    return entities[id];
+}
+void EntityManager::destroyEntity(Entity& entity)
+{
+    freeIDs.push(entity.entityID);
+    entities.erase(entity.entityID);
 }
 // EntityManager
 
@@ -44,16 +50,16 @@ void ComponentManager::registerComponent(ComponentType type)
     componentArrays[name] = newCompArr;
 }
 template <typename T>
-void ComponentManager::setComponent(Entity* entity, const T& component)
+void ComponentManager::setComponent(Entity& entity, const T& component)
 {
     getComponent<T>(entity) = component;
 }
 template <typename T>
-void ComponentManager::removeComponent(Entity* entity)
+void ComponentManager::removeComponent(Entity& entity)
 {
     auto components = getComponentArray<T>()->components;
-    delete components[entity->getEntityID()];
-    components.erase(entity->getEntityID());
+    delete components[entity.getEntityID()];
+    components.erase(entity.getEntityID());
 }
 // ComponentManager
 
@@ -72,19 +78,21 @@ std::shared_ptr<T> SystemManager::registerSystem(Signature sig)
     return newsys;
 }
 
-void SystemManager::entitySignatureChanged(Entity* entity)
+void SystemManager::entitySignatureChanged(Entity& entity)
 {
     for (auto [name, signature] : signatures)
     {
-        if ((entity->signature & signature) == signature)
+        std::vector<Entity*>& entities = systems[name]->entities;
+        if ((entity.signature & signature) == signature)
         {
-            systems[name]->entities.insert(entity);
+            systems[name]->entities.push_back(&entity);
         }
         else
         {
-            auto it = systems[name]->entities.find(entity);
+            auto it = std::find(entities.begin(), entities.end(), &entity);
             if (it != systems[name]->entities.end())
             {
+                delete *it;
                 systems[name]->entities.erase(it);
             }
         }
@@ -100,10 +108,12 @@ Signature SystemManager::getSignature()
 // SystemManager
 
 // entity
-Entity::Entity(Entity* parent) : parent(parent)
+Entity::Entity(Entity& parent) : parent(&parent)
 {
-    EntityID id = getCurrEM()->getNextID();
-    entityID = id;
-    getCurrEM()->entities[id] = this;
+    getCurrEM()->createEntity(this);
+}
+Entity::Entity() : parent(&getRoot())
+{
+    getCurrEM()->createEntity(this);
 }
 // entity
