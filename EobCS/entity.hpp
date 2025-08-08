@@ -6,43 +6,87 @@ namespace EobCS
 {
     class Entity
     {
-        std::vector<Entity *> children;
-        Entity *parent;
+        std::vector<std::shared_ptr<Entity>> children;
+        std::shared_ptr<Entity> parent;
         std::string name = "Entity";
-        EntityID entityID;
         Signature signature;
+        std::unordered_map<std::type_index, std::unique_ptr<void>> components;
 
         friend class EntityManager;
         friend class ComponentManager;
         friend class SystemManager;
 
+       protected:
+        Entity(std::shared_ptr<Entity> parent) : parent() {}
+
        public:
-        Entity(EntityID id, Entity &parent) : parent(&parent), entityID(id) {}
-        Entity(Entity &parent);
-        Entity();
-        ~Entity()
+        Entity(const Entity& other) : name(other.name), signature(other.signature)
         {
-            for (Entity *child : children)
+            if (other.parent)
+                parent = other.parent;
+
+            children = other.children;
+        }
+        ~Entity() = default;
+
+        Entity& operator=(const Entity& other)
+        {
+            if (this != &other)
             {
-                delete child;
+                name = other.name;
+                signature = other.signature;
+
+                if (other.parent)
+                    parent = other.parent;
+                else
+                    parent.reset();
+
+                children.clear();
+                children = other.children;
             }
-            delete parent;
+            return *this;
         }
-        void addChild(Entity &entity)
+
+        // Move constructor
+        Entity(Entity&& other) noexcept
+            : children(std::move(other.children)),
+              parent(std::move(other.parent)),
+              name(std::move(other.name)),
+              signature(std::move(other.signature)),
+              components(std::move(other.components))
         {
-            children.push_back(&entity);
         }
-        std::vector<Entity *> &getChildren()
+
+        // Move assignment operator
+        Entity& operator=(Entity&& other) noexcept
         {
-            return children;
+            if (this != &other)
+            {
+                children = std::move(other.children);
+                parent = std::move(other.parent);
+                name = std::move(other.name);
+                signature = std::move(other.signature);
+                components = std::move(other.components);
+            }
+            return *this;
         }
-        Entity *&getParent()
+
+        std::string& getName()
+        {
+            return name;
+        }
+        void setName(const std::string name)
+        {
+            getName() = name;
+        }
+
+        std::shared_ptr<Entity> getParent()
         {
             return parent;
         }
-        EntityID getEntityID()
+        std::vector<std::shared_ptr<Entity>> getChildren()
         {
-            return entityID;
+            return children;
         }
     };
 }  // namespace EobCS

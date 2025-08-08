@@ -14,6 +14,7 @@ project(103GE)
 #add subdir
 add_subdirectory("${CMAKE_SOURCE_DIR}/103GE-RenderEngine")
 add_subdirectory("${CMAKE_SOURCE_DIR}/103GE")
+add_subdirectory("${CMAKE_SOURCE_DIR}/imgui") #remember to add the dear-imgui source and glfw/opengl3 backend to /imgui folder("docking" branch)
 
 #add glfw3 library
 find_package(glfw3 REQUIRED)
@@ -40,6 +41,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         ${RE_INC} 
         ${CORE_INC}
         ${JNI_INCLUDE_DIRS}
+        ${IMGUI_INC}
 )
 
 #add libraries
@@ -47,5 +49,6 @@ target_link_libraries(${PROJECT_NAME}
         glad 
         glfw3 
         render
+        imgui
         ${JNI_LIBRARIES}
 )

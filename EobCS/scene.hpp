@@ -13,12 +13,12 @@ namespace EobCS
 {
     class Scene : public Entity
     {
-        EntityManager em = EntityManager(0);
+        EntityManager em;
         ComponentManager cm;
         SystemManager sm;
 
        public:
-        Scene() : Entity() {}
+        Scene();
         void update(float delta)
         {
             for (auto [name, system] : sm.getSystems())

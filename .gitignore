@@ -48,3 +48,5 @@
 **/.vscode/
 **/include/
 **/lib/
+**/imgui/*.cpp
+**/imgui/*.h

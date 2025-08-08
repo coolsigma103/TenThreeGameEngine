@@ -1,55 +1,42 @@
 #ifndef COMPONENT_MANAGER_H
 #define COMPONENT_MANAGER_H
 
+#include <typeindex>
+#include <unordered_map>
 #include "EobCS.hpp"
 #include "entity.hpp"
 
 namespace EobCS
 {
-    template <typename T>
-    class ComponentArray
-    {
-        ComponentType type;
-        std::unordered_map<EntityID, T *> components;
-        friend class ComponentManager;
-    };
-
     class ComponentManager
     {
-        std::unordered_map<const char *, std::shared_ptr<void>> componentArrays;
-        template <typename T>
-        std::shared_ptr<ComponentArray<T>> getComponentArray()
-        {
-            const char *name = typeid(T).name();
-            return componentArrays[name];
-        }
+        std::unordered_map<std::type_index, ComponentType> componentTypes;
 
        public:
-        ComponentManager()
+        ComponentManager() {}
+        template <typename T>
+        void registerComponent(ComponentType type)
         {
-            use();
+            componentTypes[typeid(T)] = type;
         }
-        void use();
         template <typename T>
-        void registerComponent(ComponentType type);
-
-        template <typename T>
-        void setComponent(Entity &entity, const T &component);
+        ComponentType getComponentType()
+        {
+            return componentTypes[typeid(T)];
+        }
 
         template <typename T>
         T &getComponent(Entity &entity)
         {
-            return getComponentArray<T>()->components[entity.getEntityID()];
+            return entity.components[typeid(T)];
         }
-
+        template <typename T>
+        void setComponent(Entity &entity, const T &comp)
+        {
+            getComponent<T>(entity) = comp;
+        }
         template <typename T>
         void removeComponent(Entity &entity);
-
-        template <typename T>
-        ComponentType getComponentType() const
-        {
-            return getComponentArray<T>().type;
-        }
     };
 
     static ComponentManager *currCM = nullptr;

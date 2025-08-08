@@ -12,16 +12,13 @@ namespace EobCS
 {
     class Root : public Entity
     {
-        EntityManager em = EntityManager(0);
+        EntityManager em;
         ComponentManager cm;
         SystemManager sm;
         Scene* currentScene = nullptr;
 
        public:
-        Root()
-        {
-            getParent() = nullptr;
-        }
+        Root();
         void changeToScene(Scene* newScene)
         {
             currentScene = newScene;

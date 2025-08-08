@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <algorithm>
+#include <typeindex>
 
 using EntityID = std::uint16_t;
 using Signature = std::bitset<32>;

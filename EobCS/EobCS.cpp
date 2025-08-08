@@ -1,4 +1,5 @@
 #include "EobCS.hpp"
+#include <algorithm>
 #include <memory>
 
 #include "entityManager.hpp"
@@ -15,52 +16,25 @@ void EntityManager::use()
 {
     getCurrEM() = this;
 }
-Entity& EntityManager::createEntity(Entity& parent)
+std::shared_ptr<Entity> EntityManager::createEntity(std::shared_ptr<Entity> parent)
 {
-    EntityID id = getNextID();
-    entities[id] = Entity(id, parent);
-    return entities[id];
+    auto newentt = std::make_shared<Entity>(parent);
+    entities.push_back(newentt);
+    return newentt;
 }
-Entity& EntityManager::createEntity(Entity* entity)
+void EntityManager::destroyEntity(std::shared_ptr<Entity> entity)
 {
-    EntityID id = getNextID();
-    entity->entityID = id;
-    entities[id] = *entity;
-    delete entity;
-    return entities[id];
-}
-void EntityManager::destroyEntity(Entity& entity)
-{
-    freeIDs.push(entity.entityID);
-    entities.erase(entity.entityID);
+    entities.erase(std::find(entities.begin(), entities.end(), entity));
 }
 // EntityManager
 
 // ComponentManager
-void ComponentManager::use()
-{
-    getCurrCM() = this;
-}
-template <typename T>
-void ComponentManager::registerComponent(ComponentType type)
-{
-    const char* name = typeid(T).name();
-    auto newCompArr = std::make_shared<ComponentArray<T>>();
-    newCompArr->type = type;
-    componentArrays[name] = newCompArr;
-}
-template <typename T>
-void ComponentManager::setComponent(Entity& entity, const T& component)
-{
-    getComponent<T>(entity) = component;
-}
 template <typename T>
 void ComponentManager::removeComponent(Entity& entity)
 {
-    auto components = getComponentArray<T>()->components;
-    delete components[entity.getEntityID()];
-    components.erase(entity.getEntityID());
+    entity.components.erase(typeid(T));
 }
+
 // ComponentManager
 
 // SystemManager
@@ -71,28 +45,26 @@ void SystemManager::use()
 template <typename T>
 std::shared_ptr<T> SystemManager::registerSystem(Signature sig)
 {
-    const char* name = typeid(T).name();
-    signatures[name] = sig;
+    signatures[typeid(T)] = sig;
     auto newsys = std::make_shared<T>();
-    systems[name] = newsys;
+    systems[typeid(T)] = newsys;
     return newsys;
 }
 
-void SystemManager::entitySignatureChanged(Entity& entity)
+void SystemManager::entitySignatureChanged(std::shared_ptr<Entity> entity)
 {
     for (auto [name, signature] : signatures)
     {
-        std::vector<Entity*>& entities = systems[name]->entities;
-        if ((entity.signature & signature) == signature)
+        auto& entities = systems[name]->entities;
+        if ((entity->signature & signature) == signature)
         {
-            systems[name]->entities.push_back(&entity);
+            entities.push_back(entity);
         }
         else
         {
             auto it = std::find(entities.begin(), entities.end(), &entity);
             if (it != systems[name]->entities.end())
             {
-                delete *it;
                 systems[name]->entities.erase(it);
             }
         }
@@ -102,18 +74,9 @@ void SystemManager::entitySignatureChanged(Entity& entity)
 template <typename T>
 Signature SystemManager::getSignature()
 {
-    const char* name = typeid(T).name();
-    return signatures[name];
+    return signatures[typeid(T)];
 }
 // SystemManager
 
 // entity
-Entity::Entity(Entity& parent) : parent(&parent)
-{
-    getCurrEM()->createEntity(this);
-}
-Entity::Entity() : parent(&getRoot())
-{
-    getCurrEM()->createEntity(this);
-}
 // entity

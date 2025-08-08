@@ -9,34 +9,19 @@ namespace EobCS
     class EntityManager
     {
        private:
-        EntityID nextID;
-        std::unordered_map<EntityID, Entity> entities;
-        std::queue<EntityID> freeIDs;
-
-        EntityID getNextID()
-        {
-            if (freeIDs.empty())
-                return nextID++;
-            else
-            {
-                EntityID id = freeIDs.front();
-                freeIDs.pop();
-                return id;
-            }
-        }
+        std::vector<std::shared_ptr<Entity>> entities;
 
         friend class Entity;
         Entity &createEntity(Entity *entity);
 
        public:
-        EntityManager(EntityID firstid = 1)
+        EntityManager()
         {
-            nextID = firstid;
             use();
         }
         void use();
-        Entity &createEntity(Entity &parent);
-        void destroyEntity(Entity &entity);
+        std::shared_ptr<Entity> createEntity(std::shared_ptr<Entity> parent);
+        void destroyEntity(std::shared_ptr<Entity> entity);
         void setSignature(Entity &entity, Signature sig)
         {
             entity.signature = sig;
