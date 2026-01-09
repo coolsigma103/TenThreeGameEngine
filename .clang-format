@@ -1,0 +1,35 @@
+BasedOnStyle: LLVM
+
+# Indentation
+UseTab: Never
+IndentWidth: 4
+ContinuationIndentWidth: 4
+
+# Access specifiers
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+
+# Case labels
+IndentCaseLabels: false
+
+# Braces
+BreakBeforeBraces: Allman
+BraceWrapping:
+  AfterClass: true
+  AfterControlStatement: true
+  AfterFunction: true
+  AfterNamespace: true
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+
+# Short statements
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+# Others
+ColumnLimit: 80
+PointerAlignment: Left
+SortIncludes: true
+DerivePointerAlignment: false
+ReflowComments: true
