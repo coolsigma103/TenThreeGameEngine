@@ -4,6 +4,10 @@
 [submodule "glm"]
 	path = external/glm
 	url = https://github.com/icaven/glm.git
+[submodule "external/argparse"]
+	path = external/argparse
+	url = https://github.com/cofyc/argparse.git
 [submodule "external/imgui"]
 	path = external/imgui
 	url = https://github.com/ocornut/imgui.git
+	branch = docking
