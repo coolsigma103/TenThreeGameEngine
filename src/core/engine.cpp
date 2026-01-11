@@ -1,7 +1,6 @@
-#include <iostream>
+#include "engine.hpp"
 
-int main()
-{
-    std::cout << "Hello World!" << std::endl;
-    return 0;
-}
+Engine::Engine() { tree = new Tree(); }
+Engine::~Engine() { delete tree; }
+
+Tree* Engine::get_tree() { return tree; }

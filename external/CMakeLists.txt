@@ -1,9 +1,11 @@
 find_package(OpenGL REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
+find_package(jsoncpp REQUIRED)
 
 add_subdirectory(glad)
 add_subdirectory(stb_impl)
 add_subdirectory(glm)
+add_subdirectory(argparse)
 
 add_library(imgui
     imgui/imgui.cpp

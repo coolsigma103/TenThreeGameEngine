@@ -1,17 +1,14 @@
-cmake_minimum_required(VERSION 4.2)
+cmake_minimum_required(VERSION 3.16)
 
 project(TenThreeGameEngine VERSION 1.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 add_subdirectory(external)
 
@@ -19,5 +16,5 @@ file(GLOB_RECURSE TEN_THREE_SOURCES src/*.cpp)
 
 add_executable(${PROJECT_NAME} ${TEN_THREE_SOURCES})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE imgui glm stb)
+target_link_libraries(${PROJECT_NAME} PRIVATE imgui glm stb argparse_static glfw glad jsoncpp)
 target_include_directories(${PROJECT_NAME} PRIVATE src ${TEN_THREE_EXTERNAL_LIB_INCLUDE_DIRS})
