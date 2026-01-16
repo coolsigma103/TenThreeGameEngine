@@ -16,5 +16,5 @@ file(GLOB_RECURSE TEN_THREE_SOURCES src/*.cpp)
 
 add_executable(${PROJECT_NAME} ${TEN_THREE_SOURCES})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE imgui glm stb argparse_static glfw glad jsoncpp)
-target_include_directories(${PROJECT_NAME} PRIVATE src ${TEN_THREE_EXTERNAL_LIB_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PRIVATE glfw glad stb_impl glm argparse jsoncpp_lib)
+target_include_directories(${PROJECT_NAME} PRIVATE src external)
