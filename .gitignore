@@ -39,3 +39,10 @@
 
 # debug information files
 *.dwo
+
+# binary files
+bin/**
+
+# cmake cache and build
+build/**
+
